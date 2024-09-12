@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LevelContoller;
+use App\Http\Controllers\UserController;
+use App\Models\UserModel;
 use Illuminate\Support\Facades\Route;
 use Monolog\Level;
 
@@ -22,3 +24,4 @@ Route::get('/', function () {
 
 route::get('/level', [LevelContoller::class, 'index']);
 route::get('/kategori', [KategoriController::class, 'index']);
+route::get('/user', [UserController::class, 'index']);
