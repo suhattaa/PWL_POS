@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LevelContoller;
 use Illuminate\Support\Facades\Route;
 use Monolog\Level;
@@ -20,3 +21,4 @@ Route::get('/', function () {
 });
 
 route::get('/level', [LevelContoller::class, 'index']);
+route::get('/kategori', [KategoriController::class, 'index']);
