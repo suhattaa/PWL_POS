@@ -42,9 +42,21 @@ class UserController extends Controller
         // });
         
 
-        $user = UserModel::findOr(20, ['username', 'nama'], function(){
-            abort(404);
-        });
-        return view('user', ['data' => $user]);
+        // $user = UserModel::findOr(20, ['username', 'nama'], function(){
+        //     abort(404);
+        // });
+        // return view('user', ['data' => $user]);
+
+        // $user = UserModel::findOrFail(1);
+
+        // $user = UserModel::where('username','manager9')->firstOrFail();
+        // return view ('user', ['data' => $user]);
+
+        // $user = UserModel::where('level_id', 2)->count();
+        // dd($user);
+        // return view('user', ['data' => $user]);
+
+        $userCount = UserModel::where('level_id', 2)->count();
+        return view('user', ['userCount' => $userCount]);
     }
 }
