@@ -5,7 +5,7 @@
       <div class="card-header"> 
         <h3 class="card-title">{{ $page->title }}</h3> 
         <div class="card-tools"> 
-          <a class="btn btn-sm btn-primary mt-1" href="{{ url('user/create') }}">Tambah</a> 
+          <a class="btn btn-sm btn-primary mt-1" href="{{ url('kategori/create') }}">Tambah</a> 
         </div> 
       </div> 
       <div class="card-body"> 
@@ -20,13 +20,12 @@
             <div class="form-group row">
               <label class="col-1 control-label col-form-label">Filter: </label>
               <div class="col-3">
-                <select class="form-control" id="level_id" name="level_id" required>
+                <select class="form-control" id="kategori_id" name="kategori_id" required>
                   <option value="">- Semua -</option>
-                  @foreach ($level as $item)
-                    <option value="{{ $item->level_id }}">{{ $item->level_nama }}</option>
+                  @foreach ($kategori as $item)
+                    <option value="{{ $item->kategori_id }}">{{ $item->kategori_nama }}</option>
                   @endforeach
                 </select>
-                <small class="form-text text-muted">Level Pengguna</small>
               </div>
             </div>
           </div>
@@ -35,9 +34,8 @@
           <thead> 
             <tr>
                 <th>No</th>
-                <th>Username</th>
-                <th>Nama</th>
-                <th>Level Pengguna</th>
+                <th>Kode</th>
+                <th>Nama Kategori</th>
                 <th>Aksi</th>
             </tr> 
           </thead> 
@@ -56,11 +54,11 @@
           // serverSide: true, jika ingin menggunakan server side processing 
           serverSide: true,      
           ajax: { 
-              "url": "{{ url('user/list') }}", 
+              "url": "{{ url('kategori/list') }}", 
               "dataType": "json", 
               "type": "POST" ,
               "data": function (d){
-                d.level_id = $('#level_id').val();
+                d.kategori_id = $('#kategori_id').val();
               }
           }, 
           columns: [ 
@@ -71,23 +69,17 @@
               orderable: false, 
               searchable: false     
             },{ 
-              data: "username",                
+              data: "kategori_kode",                
               className: "", 
               // orderable: true, jika ingin kolom ini bisa diurutkan  
               orderable: true,     
               // searchable: true, jika ingin kolom ini bisa dicari 
               searchable: true     
             },{ 
-              data: "nama",                
+              data: "kategori_nama",                
               className: "", 
               orderable: true,     
               searchable: true     
-            },{ 
-              // mengambil data level hasil dari ORM berelasi 
-              data: "level.level_nama",                
-              className: "", 
-              orderable: false,     
-              searchable: false     
             },{ 
               data: "aksi",                
               className: "", 
@@ -97,7 +89,7 @@
           ] 
       }); 
 
-      $('#level_id').on('change', function() {
+      $('#kategori_id').on('change', function() {
         dataUser.ajax.reload();
       })
     }); 

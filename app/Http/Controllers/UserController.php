@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\LevelModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
@@ -40,7 +39,7 @@ class UserController extends Controller
         if ($request->level_id){
             $user->where('level_id', $request->level_id);
         }
-
+    
         return DataTables::of($user) 
             // menambahkan kolom index / no urut (default nama kolom: DT_RowIndex) 
             ->addIndexColumn()  
@@ -50,7 +49,7 @@ class UserController extends Controller
                 $btn .= '<form class="d-inline-block" method="POST" action="'.url('/user/'.$user->user_id).'">'
                     . csrf_field() . method_field('DELETE') .
                     '<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Apakah Anda yakin menghapus data ini?\');">Hapus</button></form>';
-
+                
                 return $btn; 
             }) 
             ->rawColumns(['aksi']) // memberitahu bahwa kolom aksi adalah html 
@@ -117,7 +116,6 @@ class UserController extends Controller
             'activeMenu' => $activeMenu
         ]);
     }
-
     public function edit(string $id)
     {
         $user = UserModel::find($id);
@@ -142,10 +140,8 @@ class UserController extends Controller
             'activeMenu' => $activeMenu
         ]);
     }
-
     public function update(Request $request, string $id)
     {
-
         $request->validate([
             'username' => 'required|string|min:3|unique:m_user,username,' . $id . ',user_id', 
             'nama'     => 'required|string|max:100',
@@ -168,9 +164,10 @@ class UserController extends Controller
         if (!$check) {
             return redirect('/user')->with('error', 'Data User tidak Ditemukan');
         } 
-
+        
         try{
             UserModel::destroy($id);
+
             return redirect('/user')->with('success', 'Data User Berhasil dihapus');
         } catch (\Illuminate\Database\QueryException){
             return redirect('/user')->with('error', 'Data User Gagal dihapus karena terdapat Tabel lain yang terkait dengan data ini');
