@@ -213,6 +213,11 @@ class BarangController extends Controller
     
         redirect('/');
     }
+    public function show_ajax(string $id)
+    {
+        $barang = barangModel::find($id);
+        return view('barang.show_ajax', ['barang' => $barang]);
+    }
     public function edit_ajax(string $id)
     {
         $barang = BarangModel::find($id);
