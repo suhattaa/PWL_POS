@@ -75,5 +75,7 @@ Route::group(['prefix' => 'barang'], function(){
     Route::get('/{id}', [BarangController::class, 'show']);
     Route::get('/{id}/edit', [BarangController::class, 'edit']);
     Route::put('/{id}', [BarangController::class, 'update']);
+    Route::get('/{id}/edit_ajax', [UserController::class, 'edit_ajax']);
+    Route::put('/{id}/update_ajax', [UserController::class, 'update_ajax']);
     Route::delete('/{id}', [BarangController::class, 'destroy']);
 });
