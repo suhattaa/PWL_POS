@@ -61,6 +61,12 @@
   <!-- /.card -->
 </div>
 <!-- /.login-box -->
+<div>
+  <p class="mb-0">
+      <a href="{{ url('/register') }}" class="text-center">Don't have an account? Register now!</a>
+  </p>
+</div>
+
 <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script> 
 <!-- Bootstrap 4 --> 
 <script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script> 
