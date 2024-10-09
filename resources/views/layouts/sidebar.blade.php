@@ -62,7 +62,14 @@
           <i class="nav-icon fas fa-cash-register"></i> 
           <p>Transaksi Penjualan</p> 
         </a> 
-      </li> 
+      </li>
+      <li class="nav-header">Keluar</li> 
+      <li class="nav-item"> 
+        <a href=# class="nav-link" onclick="confirmLogout()"> 
+          <i class="nav-icon fas fa-sign-out-alt"></i>
+          <p>Log Out</p> 
+        </a> 
+      </li>  
     </ul> 
   </nav>
 </div>
