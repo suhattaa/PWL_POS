@@ -399,4 +399,3 @@ class BarangController extends Controller
         exit;
     }
 }
-
