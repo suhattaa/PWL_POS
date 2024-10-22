@@ -1,7 +1,7 @@
 <?php 
  
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers; 
+ 
 use App\Models\LevelModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request; 
@@ -14,7 +14,7 @@ class AuthController extends Controller
     public function login() 
     { 
         if(Auth::check()){ // jika sudah login, maka redirect ke halaman home 
-            return redirect('/'); 
+            return redirect('/dashboard'); 
         } 
         return view('auth.login'); 
     } 
@@ -43,12 +43,14 @@ class AuthController extends Controller
     public function register() 
     { 
         $level = LevelModel::all();
+
         return view('auth.register', compact('level')); 
     } 
     public function postregister(Request $request)
     {
         // Cek apakah request berupa Ajax atau JSON
         if($request->ajax() || $request->wantsJson()) {
+
             // Aturan validasi
             $rules = [
                 'level_id' => 'required|integer',
@@ -56,8 +58,10 @@ class AuthController extends Controller
                 'nama' => 'required|string|max:100',
                 'password' => 'required|min:6|confirmed' 
             ];
+
             // Validasi input
             $validator = Validator::make($request->all(), $rules);
+
             // Jika validasi gagal, kirim response dengan error
             if ($validator->fails()) {
                 return response()->json([
@@ -66,6 +70,7 @@ class AuthController extends Controller
                     'msgField' => $validator->errors(),
                 ]);
             }
+
             // Jika validasi berhasil, simpan data ke database
             UserModel::create([
                 'level_id' => $request->level_id,
@@ -73,6 +78,7 @@ class AuthController extends Controller
                 'nama' => $request->nama,
                 'password' => Hash::make($request->password), // Enkripsi password
             ]);
+
             // Kirim response success dan arahkan ke login
             return response()->json([
                 'status' => true,
@@ -80,6 +86,7 @@ class AuthController extends Controller
                 'redirect' => url('login') 
             ]);
         }
+
         return redirect('register');
     }
     public function logout(Request $request) 
@@ -88,6 +95,6 @@ class AuthController extends Controller
  
         $request->session()->invalidate(); 
         $request->session()->regenerateToken();     
-        return redirect('login'); 
+        return redirect('/'); 
     } 
 } 
